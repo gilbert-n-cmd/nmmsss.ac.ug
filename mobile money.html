@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paradise Hotel - Book with Mobile Money</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+    <style>
+        :root {
+            --primary: #0d4a6c;
+            --secondary: #f39c12;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .book-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .book-btn:hover {
+            background-color: #e67e22;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(13, 74, 108, 0.7), rgba(13, 74, 108, 0.7)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        /* Rooms Section */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .room-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .room-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .room-img {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .room-info {
+            padding: 20px;
+        }
+        
+        .room-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 15px 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: #666;
+            font-weight: normal;
+        }
+        
+        /* Booking Form */
+        .booking-section {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .booking-container {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .booking-content {
+            flex: 1;
+        }
+        
+        .booking-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .booking-content p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-icon {
+            background-color: rgba(243, 156, 18, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+        }
+        
+        .booking-form {
+            flex: 1;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            color: var(--dark);
+        }
+        
+        .booking-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .room-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .total-price {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .total-price span {
+            color: var(--secondary);
+        }
+        
+        .pay-btn {
+            width: 100%;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .pay-btn:hover {
+            background-color: #e67e22;
+        }
+        
+        .mobile-money-logos {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .mobile-money-logos img {
+            height: 30px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            color: white;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .booking-container {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <i class="fas fa-hotel"></i>
+                    Paradise Hotel
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Rooms</a></li>
+                    <li><a href="#">Amenities</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <button class="book-btn">Book Now</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Luxury Experience in the Heart of Nature</h1>
+                <p>Discover our premium accommodations with breathtaking views, exceptional service, and unforgettable experiences.</p>
+                <button class="book-btn">Book Your Stay Today</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Accommodations</h2>
+                <p>Experience luxury in every room with premium amenities and breathtaking views</p>
+            </div>
+            
+            <div class="rooms-grid">
+                <!-- Room 1 -->
+                <div class="room-card">
+                    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="room-info">
+                        <h3>Deluxe Room</h3>
+                        <p>Spacious room with a beautiful garden view, perfect for couples.</p>
+                        <div class="room-features">
+                            <div class="feature">
+                                <i class="fas fa-user"></i> 2 Guests
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bed"></i> King Bed
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-expand"></i> 35m²
+                            </div>
+                        </div>
+                        <div class="price">
+                            $120 <span>per night</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room 2 -->
+                <div class="room-card">
+                    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="room-info">
+                        <h3>Executive Suite</h3>
+                        <p>Luxurious suite with separate living area and panoramic ocean view.</p>
+                        <div class="room-features">
+                            <div class="feature">
+                                <i class="fas fa-user"></i> 4 Guests
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bed"></i> 2 Queen Beds
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-expand"></i> 60m²
+                            </div>
+                        </div>
+                        <div class="price">
+                            $220 <span>per night</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room 3 -->
+                <div class="room-card">
+                    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="room-info">
+                        <h3>Presidential Villa</h3>
+                        <p>Ultimate luxury with private pool, butler service and exclusive amenities.</p>
+                        <div class="room-features">
+                            <div class="feature">
+                                <i class="fas fa-user"></i> 6 Guests
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bed"></i> 3 King Beds
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-expand"></i> 120m²
+                            </div>
+                        </div>
+                        <div class="price">
+                            $450 <span>per night</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-container">
+                <div class="booking-content">
+                    <h2>Book Your Stay With Us</h2>
+                    <p>Secure your reservation with our easy mobile money payment system. We accept all major mobile money providers for your convenience.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Secure Payments</h4>
+                                <p>PCI-DSS compliant processing</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Mobile Money</h4>
+                                <p>Pay with your preferred provider</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h4>Instant Confirmation</h4>
+                                <p>Get booking details immediately</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div>
+                                <h4>24/7 Support</h4>
+                                <p>Our team is always available</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="booking-form">
+                    <h3>Reserve Your Room</h3>
+                    <form id="bookingForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkin">Check-in</label>
+                                <input type="date" id="checkin" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkout">Check-out</label>
+                                <input type="date" id="checkout" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="roomType">Room Type</label>
+                            <select id="roomType" class="room-select" required>
+                                <option value="">Select Room Type</option>
+                                <option value="deluxe" data-price="120">Deluxe Room - $120/night</option>
+                                <option value="executive" data-price="220">Executive Suite - $220/night</option>
+                                <option value="presidential" data-price="450">Presidential Villa - $450/night</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="adults">Adults</label>
+                                <select id="adults" class="form-control" required>
+                                    <option value="1">1 Adult</option>
+                                    <option value="2" selected>2 Adults</option>
+                                    <option value="3">3 Adults</option>
+                                    <option value="4">4 Adults</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="children">Children</label>
+                                <select id="children" class="form-control">
+                                    <option value="0" selected>0 Children</option>
+                                    <option value="1">1 Child</option>
+                                    <option value="2">2 Children</option>
+                                    <option value="3">3 Children</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                        </div>
+                        
+                        <div class="total-price">
+                            Total Amount: <span id="totalAmount">$0</span>
+                        </div>
+                        
+                        <button type="button" id="payButton" class="pay-btn">
+                            <i class="fas fa-lock"></i> Pay with Mobile Money
+                        </button>
+                        
+                        <div class="mobile-money-logos">
+                            <i class="fab fa-cc-mastercard fa-2x"></i>
+                            <i class="fab fa-cc-visa fa-2x"></i>
+                            <i class="fas fa-mobile-alt fa-2x"></i>
+                            <i class="fab fa-cc-paypal fa-2x"></i>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Paradise Hotel</h3>
+                    <p>Experience luxury and comfort in the most beautiful locations. We strive to make your stay unforgettable.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Rooms & Suites</a></li>
+                        <li><a href="#">Dining</a></li>
+                        <li><a href="#">Amenities</a></li>
+                        <li><a href="#">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Beach Road, Paradise Island</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@paradisehotel.com</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for special offers and updates.</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email Address">
+                        </div>
+                        <button type="submit" class="book-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Paradise Hotel. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Calculate total price based on room selection and dates
+        document.addEventListener('DOMContentLoaded', function() {
+            const roomSelect = document.getElementById('roomType');
+            const checkinInput = document.getElementById('checkin');
+            const checkoutInput = document.getElementById('checkout');
+            const totalAmountElement = document.getElementById('totalAmount');
+            
+            // Set default dates
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            checkinInput.valueAsDate = today;
+            checkoutInput.valueAsDate = tomorrow;
+            
+            // Function to calculate total
+            function calculateTotal() {
+                const roomOption = roomSelect.options[roomSelect.selectedIndex];
+                const pricePerNight = roomOption ? parseInt(roomOption.dataset.price) : 0;
+                
+                if (pricePerNight && checkinInput.value && checkoutInput.value) {
+                    const checkin = new Date(checkinInput.value);
+                    const checkout = new Date(checkoutInput.value);
+                    
+                    // Calculate number of nights
+                    const timeDiff = checkout.getTime() - checkin.getTime();
+                    const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                    
+                    if (nights > 0) {
+                        const total = pricePerNight * nights;
+                        totalAmountElement.textContent = '$' + total;
+                    } else {
+                        totalAmountElement.textContent = '$0';
+                    }
+                } else {
+                    totalAmountElement.textContent = '$0';
+                }
+            }
+            
+            // Event listeners
+            roomSelect.addEventListener('change', calculateTotal);
+            checkinInput.addEventListener('change', calculateTotal);
+            checkoutInput.addEventListener('change', calculateTotal);
+            
+            // Initialize calculation
+            calculateTotal();
+            
+            // Flutterwave Payment Integration
+            document.getElementById('payButton').addEventListener('click', function() {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const amount = totalAmountElement.textContent.replace('$', '');
+                
+                if (!name || !email || !phone || amount === '0') {
+                    alert('Please fill in all fields and select a room');
+                    return;
+                }
+                
+                // Flutterwave payment configuration
+                FlutterwaveCheckout({
+                    public_key: "FLWPUBK_TEST-SANDBOXDEMOKEY-X", // Test public key (replace with your own in production)
+                    tx_ref: "PARADISE_" + Date.now(),
+                    amount: amount,
+                    currency: "USD",
+                    payment_options: "mobilemoney",
+                    customer: {
+                        email: email,
+                        phone_number: phone,
+                        name: name,
+                    },
+                    callback: function(response) {
+                        // Payment completed callback
+                        if (response.status === 'successful') {
+                            alert('Payment successful! Your booking is confirmed. Transaction ID: ' + response.transaction_id);
+                        } else {
+                            alert('Payment was not completed. Please try again.');
+                        }
+                    },
+                    customizations: {
+                        title: "Paradise Hotel Booking",
+                        description: "Room Reservation Payment",
+                        logo: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+</html>
