@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paradise Hotel - Book with Mobile Money</title>
+    <title>Paradise Hotel - Luxury Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://checkout.flutterwave.com/v3.js"></script>
     <style>
+        /* Global Styles */
         :root {
             --primary: #0d4a6c;
             --secondary: #f39c12;
@@ -34,6 +35,56 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #e67e22;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: white;
         }
         
         /* Header Styles */
@@ -77,10 +128,22 @@
             color: var(--dark);
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
         }
         
+        .nav-links a.active, 
         .nav-links a:hover {
             color: var(--secondary);
+        }
+        
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--secondary);
         }
         
         .book-btn {
@@ -100,7 +163,7 @@
         
         /* Hero Section */
         .hero {
-            height: 80vh;
+            height: 60vh;
             background: linear-gradient(rgba(13, 74, 108, 0.7), rgba(13, 74, 108, 0.7)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
             display: flex;
             align-items: center;
@@ -127,28 +190,6 @@
         }
         
         /* Rooms Section */
-        .section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
         .rooms-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -271,8 +312,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             color: var(--dark);
         }
-        
-        .booking-form h3 {
+       .booking-form h3 {
             font-size: 1.8rem;
             margin-bottom: 20px;
             color: var(--primary);
@@ -365,6 +405,188 @@
             opacity: 0.7;
         }
         
+        /* About Page */
+        .about-section {
+            padding: 80px 0;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .value-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        /* Amenities Page */
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .amenity-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .amenity-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .amenity-info {
+            padding: 20px;
+        }
+        
+        .amenity-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Gallery Page */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Contact Page */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(13, 74, 108, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+        
+        .contact-map {
+            height: 300px;
+            background-color: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
         /* Footer */
         footer {
             background-color: var(--dark);
@@ -455,12 +677,29 @@
             font-size: 0.9rem;
         }
         
+        /* Page Content */
+        .page-content {
+            display: none;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container,
             .booking-container {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
             
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -473,6 +712,10 @@
                 flex-direction: column;
                 gap: 0;
             }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -481,241 +724,797 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">
+                <a href="#" class="logo" onclick="showPage('home')">
                     <i class="fas fa-hotel"></i>
                     Paradise Hotel
                 </a>
                 <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Rooms</a></li>
-                    <li><a href="#">Amenities</a></li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#" class="active" onclick="showPage('home')">Home</a></li>
+                    <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                    <li><a href="#" onclick="showPage('rooms')">Rooms & Suites</a></li>
+                    <li><a href="#" onclick="showPage('amenities')">Amenities</a></li>
+                    <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+                    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
                 </ul>
-                <button class="book-btn">Book Now</button>
+                <button class="book-btn" onclick="showPage('booking')">Book Now</button>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Luxury Experience in the Heart of Nature</h1>
-                <p>Discover our premium accommodations with breathtaking views, exceptional service, and unforgettable experiences.</p>
-                <button class="book-btn">Book Your Stay Today</button>
+    <!-- Home Page -->
+    <div id="home" class="page-content active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Luxury Experience in the Heart of Nature</h1>
+                    <p>Discover our premium accommodations with breathtaking views, exceptional service, and unforgettable experiences.</p>
+                    <button class="book-btn" onclick="showPage('booking')">Book Your Stay Today</button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Rooms Section -->
-    <section class="section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Accommodations</h2>
-                <p>Experience luxury in every room with premium amenities and breathtaking views</p>
-            </div>
-            
-            <div class="rooms-grid">
-                <!-- Room 1 -->
-                <div class="room-card">
-                    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="room-info">
-                        <h3>Deluxe Room</h3>
-                        <p>Spacious room with a beautiful garden view, perfect for couples.</p>
-                        <div class="room-features">
-                            <div class="feature">
-                                <i class="fas fa-user"></i> 2 Guests
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-bed"></i> King Bed
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-expand"></i> 35m²
-                            </div>
-                        </div>
-                        <div class="price">
-                            $120 <span>per night</span>
-                        </div>
-                    </div>
+        <!-- Rooms Section -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Accommodations</h2>
+                    <p>Experience luxury in every room with premium amenities and breathtaking views</p>
                 </div>
                 
-                <!-- Room 2 -->
-                <div class="room-card">
-                    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="room-info">
-                        <h3>Executive Suite</h3>
-                        <p>Luxurious suite with separate living area and panoramic ocean view.</p>
-                        <div class="room-features">
-                            <div class="feature">
-                                <i class="fas fa-user"></i> 4 Guests
+                <div class="rooms-grid">
+                    <!-- Room 1 -->
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="room-info">
+                            <h3>Deluxe Room</h3>
+                            <p>Spacious room with a beautiful garden view, perfect for couples.</p>
+                            <div class="room-features">
+                                <div class="feature">
+                                    <i class="fas fa-user"></i> 2 Guests
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i> King Bed
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-expand"></i> 35m²
+                                </div>
                             </div>
-                            <div class="feature">
-                                <i class="fas fa-bed"></i> 2 Queen Beds
+                            <div class="price">
+                                $120 <span>per night</span>
                             </div>
-                            <div class="feature">
-                                <i class="fas fa-expand"></i> 60m²
-                            </div>
-                        </div>
-                        <div class="price">
-                            $220 <span>per night</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Room 3 -->
-                <div class="room-card">
-                    <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
-                    <div class="room-info">
-                        <h3>Presidential Villa</h3>
-                        <p>Ultimate luxury with private pool, butler service and exclusive amenities.</p>
-                        <div class="room-features">
-                            <div class="feature">
-                                <i class="fas fa-user"></i> 6 Guests
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-bed"></i> 3 King Beds
-                            </div>
-                            <div class="feature">
-                                <i class="fas fa-expand"></i> 120m²
-                            </div>
-                        </div>
-                        <div class="price">
-                            $450 <span>per night</span>
+                            <button class="btn" onclick="showPage('booking')">Book Now</button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Booking Section -->
-    <section class="booking-section">
-        <div class="container">
-            <div class="booking-container">
-                <div class="booking-content">
-                    <h2>Book Your Stay With Us</h2>
-                    <p>Secure your reservation with our easy mobile money payment system. We accept all major mobile money providers for your convenience.</p>
                     
-                    <div class="features-grid">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
+                    <!-- Room 2 -->
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="room-info">
+                            <h3>Executive Suite</h3>
+                            <p>Luxurious suite with separate living area and panoramic ocean view.</p>
+                            <div class="room-features">
+                                <div class="feature">
+                                    <i class="fas fa-user"></i> 4 Guests
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i> 2 Queen Beds
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-expand"></i> 60m²
+                                </div>
                             </div>
-                            <div>
-                                <h4>Secure Payments</h4>
-                                <p>PCI-DSS compliant processing</p>
+                            <div class="price">
+                                $220 <span>per night</span>
                             </div>
+                            <button class="btn" onclick="showPage('booking')">Book Now</button>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    
+                    <!-- Room 3 -->
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="room-info">
+                            <h3>Presidential Villa</h3>
+                            <p>Ultimate luxury with private pool, butler service and exclusive amenities.</p>
+                            <div class="room-features">
+                                <div class="feature">
+                                    <i class="fas fa-user"></i> 6 Guests
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i> 3 King Beds
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-expand"></i> 120m²
+                                </div>
                             </div>
-                            <div>
-                                <h4>Mobile Money</h4>
-                                <p>Pay with your preferred provider</p>
+                            <div class="price">
+                                $450 <span>per night</span>
                             </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <div>
-                                <h4>Instant Confirmation</h4>
-                                <p>Get booking details immediately</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-headset"></i>
-                            </div>
-                            <div>
-                                <h4>24/7 Support</h4>
-                                <p>Our team is always available</p>
-                            </div>
+                            <button class="btn" onclick="showPage('booking')">Book Now</button>
                         </div>
                     </div>
                 </div>
-                
-                <div class="booking-form">
-                    <h3>Reserve Your Room</h3>
-                    <form id="bookingForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="checkin">Check-in</label>
-                                <input type="date" id="checkin" class="form-control" required>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section class="booking-section">
+            <div class="container">
+                <div class="booking-container">
+                    <div class="booking-content">
+                        <h2>Book Your Stay With Us</h2>
+                        <p>Secure your reservation with our easy mobile money payment system. We accept all major mobile money providers for your convenience.</p>
+                        
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div>
+                                    <h4>Secure Payments</h4>
+                                    <p>PCI-DSS compliant processing</p>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="checkout">Check-out</label>
-                                <input type="date" id="checkout" class="form-control" required>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div>
+                                    <h4>Mobile Money</h4>
+                                    <p>Pay with your preferred provider</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div>
+                                    <h4>Instant Confirmation</h4>
+                                    <p>Get booking details immediately</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div>
+                                    <h4>24/7 Support</h4>
+                                    <p>Our team is always available</p>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="roomType">Room Type</label>
-                            <select id="roomType" class="room-select" required>
-                                <option value="">Select Room Type</option>
-                                <option value="deluxe" data-price="120">Deluxe Room - $120/night</option>
-                                <option value="executive" data-price="220">Executive Suite - $220/night</option>
-                                <option value="presidential" data-price="450">Presidential Villa - $450/night</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-row">
+                    </div>
+                    
+                    <div class="booking-form">
+                        <h3>Reserve Your Room</h3>
+                        <form id="bookingForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="checkin">Check-in</label>
+                                    <input type="date" id="checkin" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="checkout">Check-out</label>
+                                    <input type="date" id="checkout" class="form-control" required>
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
-                                <label for="adults">Adults</label>
-                                <select id="adults" class="form-control" required>
-                                    <option value="1">1 Adult</option>
-                                    <option value="2" selected>2 Adults</option>
-                                    <option value="3">3 Adults</option>
-                                    <option value="4">4 Adults</option>
+                                <label for="roomType">Room Type</label>
+                                <select id="roomType" class="room-select" required>
+                                    <option value="">Select Room Type</option>
+                                    <option value="deluxe" data-price="120">Deluxe Room - $120/night</option>
+                                    <option value="executive" data-price="220">Executive Suite - $220/night</option>
+                                    <option value="presidential" data-price="450">Presidential Villa - $450/night</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="children">Children</label>
-                                <select id="children" class="form-control">
-                                    <option value="0" selected>0 Children</option>
-                                    <option value="1">1 Child</option>
-                                    <option value="2">2 Children</option>
-                                    <option value="3">3 Children</option>
-                                </select>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="adults">Adults</label>
+                                    <select id="adults" class="form-control" required>
+                                        <option value="1">1 Adult</option>
+                                        <option value="2" selected>2 Adults</option>
+                                        <option value="3">3 Adults</option>
+                                        <option value="4">4 Adults</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="children">Children</label>
+                                    <select id="children" class="form-control">
+                                        <option value="0" selected>0 Children</option>
+                                        <option value="1">1 Child</option>
+                                        <option value="2">2 Children</option>
+                                        <option value="3">3 Children</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
-                        </div>
-                        
-                        <div class="total-price">
-                            Total Amount: <span id="totalAmount">$0</span>
-                        </div>
-                        
-                        <button type="button" id="payButton" class="pay-btn">
-                            <i class="fas fa-lock"></i> Pay with Mobile Money
-                        </button>
-                        
-                        <div class="mobile-money-logos">
-                            <i class="fab fa-cc-mastercard fa-2x"></i>
-                            <i class="fab fa-cc-visa fa-2x"></i>
-                            <i class="fas fa-mobile-alt fa-2x"></i>
-                            <i class="fab fa-cc-paypal fa-2x"></i>
-                        </div>
-                    </form>
+                            
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                            </div>
+                            
+                            <div class="total-price">
+                                Total Amount: <span id="totalAmount">$0</span>
+                            </div>
+                            
+                            <button type="button" id="payButton" class="pay-btn">
+                                <i class="fas fa-lock"></i> Pay with Mobile Money
+                            </button>
+                            
+                            <div class="mobile-money-logos">
+                                <i class="fab fa-cc-mastercard fa-2x"></i>
+                                <i class="fab fa-cc-visa fa-2x"></i>
+                                <i class="fas fa-mobile-alt fa-2x"></i>
+                                <i class="fab fa-cc-paypal fa-2x"></i>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <div id="about" class="page-content">
+        <section class="hero" style="background-image: linear-gradient(rgba(13, 74, 108, 0.7), rgba(13, 74, 108, 0.7)), url('https://images.unsplash.com/photo-1561501900-3701fa6a0864?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>About Paradise Hotel</h1>
+                    <p>Discover our story and commitment to exceptional hospitality</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-img">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Paradise Hotel">
+                    </div>
+                    <div class="about-text">
+                        <h2>Our Story</h2>
+                        <p>Founded in 2005, Paradise Hotel began as a small boutique hotel with just 12 rooms. Our founders, John and Sarah Richardson, envisioned a place where luxury meets nature, creating a serene escape for travelers seeking both comfort and adventure.</p>
+                        <p>Over the years, we've expanded to become a premier destination with 120 rooms, suites, and villas, each designed to provide an unforgettable experience. Our commitment to sustainability and community engagement has earned us numerous awards and recognition.</p>
+                        <p>Today, Paradise Hotel continues to uphold the values of exceptional service, environmental stewardship, and creating meaningful connections with our guests and the local community.</p>
+                        <a href="#" class="btn" onclick="showPage('contact')">Contact Us</a>
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top: 80px;">
+                    <h2>Our Values</h2>
+                    <p>The principles that guide everything we do</p>
+                </div>
+
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Exceptional Service</h3>
+                        <p>We go above and beyond to ensure every guest feels valued and cared for throughout their stay.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>Sustainability</h3>
+                        <p>We're committed to environmentally responsible practices and reducing our ecological footprint.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Community</h3>
+                        <p>We support local businesses and initiatives, contributing to the wellbeing of our surrounding community.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Excellence</h3>
+                        <p>We continuously strive for perfection in every aspect of our operations and guest experiences.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Innovation</h3>
+                        <p>We embrace new ideas and technologies to enhance our guests' experiences.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Teamwork</h3>
+                        <p>Our dedicated staff works together to create memorable experiences for every guest.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Rooms Page -->
+    <div id="rooms" class="page-content">
+        <section class="hero" style="background-image: linear-gradient(rgba(13, 74, 108, 0.7), rgba(13, 74, 108, 0.7)), url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Rooms & Suites</h1>
+                    <p>Discover our luxurious accommodations designed for your comfort</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Accommodation Options</h2>
+                    <p>Choose from our selection of elegant rooms and suites</p>
+                </div>
+                
+                <div class="rooms-grid">
+                    <!-- Deluxe Room -->
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="room-info">
+                            <h3>Deluxe Room</h3>
+                            <p>Spacious room with a beautiful garden view, perfect for couples.</p>
+                            <div class="room-features">
+                                <div class="feature">
+                                    <i class="fas fa-user"></i> 2 Guests
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i> King Bed
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-expand"></i> 35m²
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-wifi"></i> Free WiFi
+                                </div>
+                            </div>
+                            <div class="price">
+                                $120 <span>per night</span>
+                            </div>
+                            <button class="btn" onclick="showPage('booking')">Book Now</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Executive Suite -->
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="room-info">
+                            <h3>Executive Suite</h3>
+                            <p>Luxurious suite with separate living area and panoramic ocean view.</p>
+                            <div class="room-features">
+                                <div class="feature">
+                                    <i class="fas fa-user"></i> 4 Guests
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i> 2 Queen Beds
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-expand"></i> 60m²
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-coffee"></i> Coffee Maker
+                                </div>
+                            </div>
+                            <div class="price">
+                                $220 <span>per night</span>
+                            </div>
+                            <button class="btn" onclick="showPage('booking')">Book Now</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Presidential Villa -->
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="room-info">
+                            <h3>Presidential Villa</h3>
+                            <p>Ultimate luxury with private pool, butler service and exclusive amenities.</p>
+                            <div class="room-features">
+                                <div class="feature">
+                                    <i class="fas fa-user"></i> 6 Guests
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i> 3 King Beds
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-expand"></i> 120m²
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-swimming-pool"></i> Private Pool
+                                </div>
+                            </div>
+                            <div class="price">
+                                $450 <span>per night</span>
+                            </div>
+                            <button class="btn" onclick="showPage('booking')">Book Now</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Family Suite -->
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1592229505726-cf1216634a79?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="room-info">
+                            <h3>Family Suite</h3>
+                            <p>Spacious suite with separate children's area, perfect for families.</p>
+                            <div class="room-features">
+                                <div class="feature">
+                                    <i class="fas fa-user"></i> 5 Guests
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i> 1 King + 2 Singles
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-expand"></i> 70m²
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-gamepad"></i> Game Console
+                                </div>
+                            </div>
+                            <div class="price">
+                                $280 <span>per night</span>
+                            </div>
+                            <button class="btn" onclick="showPage('booking')">Book Now</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Ocean View Room -->
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="room-info">
+                            <h3>Ocean View Room</h3>
+                            <p>Beautiful room with stunning ocean views and private balcony.</p>
+                            <div class="room-features">
+                                <div class="feature">
+                                    <i class="fas fa-user"></i> 2 Guests
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i> King Bed
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-expand"></i> 40m²
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-umbrella-beach"></i> Beach Access
+                                </div>
+                            </div>
+                            <div class="price">
+                                $180 <span>per night</span>
+                            </div>
+                            <button class="btn" onclick="showPage('booking')">Book Now</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Honeymoon Suite -->
+                    <div class="room-card">
+                        <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="room-info">
+                            <h3>Honeymoon Suite</h3>
+                            <p>Romantic suite with champagne on arrival and special amenities.</p>
+                            <div class="room-features">
+                                <div class="feature">
+                                    <i class="fas fa-user"></i> 2 Guests
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-bed"></i> King Bed
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-expand"></i> 55m²
+                                </div>
+                                <div class="feature">
+                                    <i class="fas fa-hot-tub"></i> Jacuzzi
+                                </div>
+                            </div>
+                            <div class="price">
+                                $320 <span>per night</span>
+                            </div>
+                            <button class="btn" onclick="showPage('booking')">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Amenities Page -->
+    <div id="amenities" class="page-content">
+        <section class="hero" style="background-image: linear-gradient(rgba(13, 74, 108, 0.7), rgba(13, 74, 108, 0.7)), url('https://images.unsplash.com/photo-1561501878-aabd62634533?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Amenities & Services</h1>
+                    <p>Discover the exceptional facilities we offer for our guests</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Hotel Amenities</h2>
+                    <p>Experience luxury and comfort with our premium facilities</p>
+                </div>
+                
+                <div class="amenities-grid">
+                    <!-- Restaurant -->
+                    <div class="amenity-card">
+                        <div class="amenity-img" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="amenity-info">
+                            <h3>Fine Dining Restaurant</h3>
+                            <p>Experience gourmet cuisine with locally sourced ingredients in our elegant dining room with panoramic ocean views.</p>
+                            <p><strong>Opening Hours:</strong> 7:00 AM - 10:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Spa -->
+                    <div class="amenity-card">
+                        <div class="amenity-img" style="background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="amenity-info">
+                            <h3>Serenity Spa</h3>
+                            <p>Indulge in rejuvenating treatments with natural ingredients in our luxurious spa facilities.</p>
+                            <p><strong>Services:</strong> Massages, Facials, Body Treatments</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Pool -->
+                    <div class="amenity-card">
+                        <div class="amenity-img" style="background-image: url('https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="amenity-info">
+                            <h3>Infinity Pool</h3>
+                            <p>Our stunning infinity pool offers breathtaking ocean views and a refreshing escape.</p>
+                            <p><strong>Opening Hours:</strong> 6:00 AM - 10:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Fitness -->
+                    <div class="amenity-card">
+                        <div class="amenity-img" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="amenity-info">
+                            <h3>Fitness Center</h3>
+                            <p>Stay active with state-of-the-art equipment and daily fitness classes.</p>
+                            <p><strong>Features:</strong> Cardio, Weights, Yoga Studio</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Beach -->
+                    <div class="amenity-card">
+                        <div class="amenity-img" style="background-image: url('https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="amenity-info">
+                            <h3>Private Beach Access</h3>
+                            <p>Enjoy our exclusive beach area with complimentary sun loungers and water sports equipment.</p>
+                            <p><strong>Activities:</strong> Kayaking, Snorkeling, Paddle Boarding</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Business -->
+                    <div class="amenity-card">
+                        <div class="amenity-img" style="background-image: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80')"></div>
+                        <div class="amenity-info">
+                            <h3>Business Center</h3>
+                            <p>Fully equipped meeting rooms and business facilities for corporate guests.</p>
+                            <p><strong>Services:</strong> Printing, Video Conferencing, Secretarial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Gallery Page -->
+    <div id="gallery" class="page-content">
+        <section class="hero" style="background-image: linear-gradient(rgba(13, 74, 108, 0.7), rgba(13, 74, 108, 0.7)), url('https://images.unsplash.com/photo-1517840901100-8179e982acb7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Photo Gallery</h1>
+                    <p>Explore the beauty of Paradise Hotel through our images</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Gallery</h2>
+                    <p>Discover our stunning property through these beautiful images</p>
+                </div>
+                
+                <div class="gallery-container">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Exterior">
+                        <div class="gallery-caption">Main Hotel Building</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Deluxe Room">
+                        <div class="gallery-caption">Deluxe Room</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Executive Suite">
+                        <div class="gallery-caption">Executive Suite</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Presidential Villa">
+                        <div class="gallery-caption">Presidential Villa</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Restaurant">
+                        <div class="gallery-caption">Fine Dining Restaurant</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Spa">
+                        <div class="gallery-caption">Serenity Spa</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pool">
+                        <div class="gallery-caption">Infinity Pool</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Beach">
+                        <div class="gallery-caption">Private Beach</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1551632436-7a879920dd3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wedding">
+                        <div class="gallery-caption">Wedding Venue</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Gym">
+                        <div class="gallery-caption">Fitness Center</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bar">
+                        <div class="gallery-caption">Sunset Bar</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Lobby">
+                        <div class="gallery-caption">Grand Lobby</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact" class="page-content">
+        <section class="hero" style="background-image: linear-gradient(rgba(13, 74, 108, 0.7), rgba(13, 74, 108, 0.7)), url('https://images.unsplash.com/photo-1498503182468-3b51cbb6cb24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Contact Us</h1>
+                    <p>We'd love to hear from you. Get in touch with our team</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <p>Have questions about our hotel, services, or availability? Our team is ready to assist you with any inquiries.</p>
+                        
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4>Address</h4>
+                                    <p>123 Beach Road, Paradise Island</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4>Phone</h4>
+                                    <p>+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>info@paradisehotel.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4>Reception Hours</h4>
+                                    <p>24 hours / 7 days a week</p>
+                                </div>
+                            </div>
+                        </div>
+                        <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Africa%2FNairobi&showPrint=0&src=Z2lsYmVydGF0dW1hNzAwQGdtYWlsLmNvbQ&src=ZW4udWcjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039be5&color=%230b8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+                        <h3>Follow Us</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="booking-form">
+                        <h3>Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contactName">Full Name</label>
+                                    <input type="text" id="contactName" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactEmail">Email</label>
+                                    <input type="email" id="contactEmail" class="form-control" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contactSubject">Subject</label>
+                                <input type="text" id="contactSubject" class="form-control" placeholder="Subject" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contactMessage">Message</label>
+                                <textarea id="contactMessage" class="form-control" rows="2" placeholder="Your Message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="pay-btn">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="contact-map">
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Africa%2FNairobi&showPrint=0&src=Z2lsYmVydGF0dW1hNzAwQGdtYWlsLmNvbQ&src=ZW4udWcjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039be5&color=%230b8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+                    <!-- In a real implementation, this would be a Google Maps embed -->
+                    <div style="width:100%;height:300px;background-color:#eee;display:flex;align-items:center;justify-content:center;border-radius:10px;">
+                        <i class="fas fa-map-marker-alt fa-3x" style="color:var(--secondary)"></i>
+                        <p style="margin-left:15px;font-size:1.2rem;">Paradise Hotel Location Map</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -735,11 +1534,11 @@
                 <div class="footer-col">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Rooms & Suites</a></li>
-                        <li><a href="#">Dining</a></li>
-                        <li><a href="#">Amenities</a></li>
-                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#" onclick="showPage('home')">Home</a></li>
+                        <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                        <li><a href="#" onclick="showPage('rooms')">Rooms & Suites</a></li>
+                        <li><a href="#" onclick="showPage('amenities')">Amenities</a></li>
+                        <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
                     </ul>
                 </div>
                 
@@ -780,6 +1579,30 @@
     </footer>
 
     <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation active state
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Set active state for current page
+            if(pageId === 'home') {
+                document.querySelector('.nav-links a[onclick="showPage(\'home\')"]').classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
         // Calculate total price based on room selection and dates
         document.addEventListener('DOMContentLoaded', function() {
             const roomSelect = document.getElementById('roomType');
@@ -865,6 +1688,13 @@
                         logo: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
                     },
                 });
+            });
+            
+            // Contact form submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! We will get back to you soon.');
+                this.reset();
             });
         });
     </script>
